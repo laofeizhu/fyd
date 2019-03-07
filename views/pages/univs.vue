@@ -1,11 +1,17 @@
 <template>
-  <v-data-table :headers="headers" :items="univs" class="elevation-1">
-    <template slot="items" scope="props">
-      <td>{{ props.item.rank }}</td>
-      <td class="text-xs-right">{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.address }}</td>
-    </template>
-  </v-data-table>
+  <v-card>
+    <v-card-title> Universities
+      <v-spacer></v-spacer>
+      <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+    </v-card-title>
+    <v-data-table :search="search" :headers="headers" :items="univs" class="elevation-1">
+      <template slot="items" scope="props">
+        <td>{{ props.item.rank }}</td>
+        <td class="text-xs-right">{{ props.item.name }}</td>
+        <td class="text-xs-right">{{ props.item.address }}</td>
+      </template>
+    </v-data-table>
+  </v-card>
 </template>
 
 <script>
@@ -14,6 +20,7 @@ import { http } from "../config/http.js";
 export default {
   //Variables
   data: () => ({
+    search: "",
     headers: [
       {
         text: "Rank",
