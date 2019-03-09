@@ -6,10 +6,54 @@
       height="500"
       :default-sort="{prop: sortKey, order: sortOrder}"
       size="large"
+      ref="refTable"
+      @row-click="rowClicked"
     >
+      <el-table-column type="expand">
+        <template slot-scope="univTable">
+          <el-tabs type="border-card">
+            <el-tab-pane label="Restaurants">
+              <el-table
+                :data="univTable.row.restaurants"
+                max-height="300"
+                :default-sort="{prop: 'rating', order: 'descending'}"
+              >
+                <el-table-column prop="name" label="Name"></el-table-column>
+                <el-table-column prop="rating" label="Rating" sortable>
+                  <template slot-scope="scope">
+                    <el-rate :value="scope.row.rating" disabled/>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="Housing">Comming soon</el-tab-pane>
+            <el-tab-pane label="Location">
+              <GmapMap
+                :center="univTable.row.location"
+                :zoom="13"
+                style="width: 500px; height: 300px"
+              >
+                <GmapMarker
+                  :position="univTable.row.location"
+                  :clickable="true"
+                  :draggable="true"
+                  @click="center=univTable.row.location"
+                />
+              </GmapMap>
+            </el-tab-pane>
+          </el-tabs>
+        </template>
+      </el-table-column>
       <el-table-column width="100" sortable="custom" prop="rank" label="Rank"></el-table-column>
       <el-table-column prop="name" label="Name"></el-table-column>
-      <el-table-column prop="address" label="Address"></el-table-column>
+      <el-table-column>
+        <template slot-scope="scope">
+          <a-tag color="blue">
+            <i class="fas fa-utensils"></i>
+            ({{scope.row.restaurants.length}})
+          </a-tag>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       :current-page.sync="pageIndex"
@@ -23,6 +67,7 @@
 
 <script>
 import { http } from "../config/http.js";
+import * as VueGoogleMaps from "vue2-google-maps";
 
 export default {
   //Variables
@@ -63,6 +108,9 @@ export default {
 
   //The methods we will need
   methods: {
+    rowClicked(row, column, evt) {
+      this.$refs.refTable.toggleRowExpansion(row);
+    },
     handleSortChange({ column, prop, order }) {
       this.sortKey = column;
       this.sortOrder = order;
