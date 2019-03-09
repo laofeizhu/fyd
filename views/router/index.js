@@ -7,7 +7,7 @@ import homePage from '../pages/home.vue'
 Vue.use(Router)
 
 const router = new Router ({
-  root: '/home',
+  root: '/univs',
   routes: 
   [
     {
@@ -22,7 +22,7 @@ const router = new Router ({
     },
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/univs'
     }
   ]
 })

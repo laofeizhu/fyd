@@ -1,17 +1,15 @@
 import Vue from "vue";
+import Element from "element-ui";
 import App from "./App.vue";
-import Vuetify from "vuetify";
 import router from "./router";
-import "./stylus/main.styl";
+import "element-ui/lib/theme-chalk/reset.css";
+import "element-ui/lib/theme-chalk/index.css";
+import lang from "element-ui/lib/locale/lang/en";
+import locale from "element-ui/lib/locale";
 
-Vue.use(Vuetify, {
-  theme: {
-    primary: "#0D47A1", //Main color
-    primaryText: "#FFFFßFF", //Color for text on primary
-    secondary: "#90CAF9", //Color for active nav
-    lightText: "#000000" //Dark Text for light Backgrounds
-  }
-});
+locale.use(lang);
+
+Vue.use(Element), { locale };
 
 //Create the App with the router
 new Vue({
