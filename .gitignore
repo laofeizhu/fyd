@@ -5,7 +5,7 @@ dist/
 npm-debug.log
 yarn-error.log
 package-lock.json
-
+.env
 # Editor directories and files
 .idea
 *.suo
