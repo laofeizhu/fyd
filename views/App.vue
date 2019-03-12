@@ -5,7 +5,7 @@
         <el-aside width="100px">
           <el-menu>
             <el-menu-item index="1">
-              <router-link to="/home">Home</router-link>
+              <router-link to="/home">Guide</router-link>
             </el-menu-item>
             <el-menu-item index="2">
               <router-link to="/univs">University</router-link>

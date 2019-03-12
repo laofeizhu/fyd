@@ -1,53 +1,67 @@
 <template>
-  <v-container class="pa-0">
-    <v-container>
-      <template>
-        <v-layout row>
-          <v-flex>
-            <v-card>
-              <v-toolbar class="primary primaryText--text">
-              <v-toolbar-title> Welcome to a Home Page component </v-toolbar-title>
-              </v-toolbar>
-              <v-container fluid>
-                <v-card-text>
-                  This is a simple layout for a page. The entire application is simply swapping out components in
-                  this center area. Generally I make them look like cards, which I then fill with the proper
-                  vuetify components to best present data.
-                  <br>
-                  <br>
-                  <hr>
-                  <br>
-                  The next page is a User Management page with a template
-                  for displaying data, as well as modals for doing basic CRUD operations on that data. I suggest you look
-                  over the layout as well as the code to understand how it works.
-                  <br>
-                  <br>
-                  <hr>
-                  <br>
-                  It should be noted that for the User Management page to make sense and appear properly the
-                  REST API part of this project should be started as well (including the Mongo Daemon). The README on 
-                  the GitHub page for this project should help walk you through the necessary steps to install it.
-                </v-card-text>
-              </v-container>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </template>
-    </v-container>
-  </v-container>
+  <div>
+    <a-steps :current="current">
+      <a-step v-for="item in steps" :key="item.title" :title="item.title"/>
+    </a-steps>
+    <div class="steps-content">{{steps[current].content}}</div>
+    <div class="steps-action">
+      <a-button v-if="current < steps.length - 1" type="primary" @click="next">Next</a-button>
+      <a-button
+        v-if="current == steps.length - 1"
+        type="primary"
+        @click="$message.success('Processing complete!')"
+      >Done</a-button>
+      <a-button v-if="current>0" style="margin-left: 8px" @click="prev">Previous</a-button>
+    </div>
+  </div>
 </template>
+
 
 <script>
 export default {
   data: () => ({
     value: "",
     num1: 0,
-    num2: 0
-  })
-
-}
+    num2: 0,
+    current: 0,
+    steps: [
+      {
+        title: "First",
+        content: "First-content"
+      },
+      {
+        title: "Second",
+        content: "Second-content"
+      },
+      {
+        title: "Last",
+        content: "Last-content"
+      }
+    ]
+  }),
+  methods: {
+    next() {
+      this.current++;
+    },
+    prev() {
+      this.current--;
+    }
+  }
+};
 </script>
+<style scoped>
+.steps-content {
+  margin-top: 16px;
+  border: 1px dashed #e9e9e9;
+  border-radius: 6px;
+  background-color: #fafafa;
+  min-height: 200px;
+  text-align: center;
+  padding-top: 80px;
+}
 
-<style>
-
+.steps-action {
+  margin-top: 24px;
+}
 </style>
+

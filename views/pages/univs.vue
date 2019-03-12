@@ -29,14 +29,32 @@
             <el-tab-pane label="Housing">Comming soon</el-tab-pane>
             <el-tab-pane label="Location">
               <GmapMap
+                :options="{
+                  zoomControl: true,
+                  mapTypeControl: false,
+                  scaleControl: false,
+                  streetViewControl: false,
+                  rotateControl: false,
+                  fullscreenControl: true,
+                  disableDefaultUi: false
+                }"
                 :center="univTable.row.location"
-                :zoom="13"
+                :zoom="16"
                 style="width: 500px; height: 300px"
               >
                 <GmapMarker
                   :position="univTable.row.location"
                   :clickable="true"
                   :draggable="true"
+                  @click="center=univTable.row.location"
+                />
+                <GmapMarker
+                  :key="index"
+                  v-for="(m,index) in univTable.row.restaurants"
+                  :position="m.location"
+                  :clickable="true"
+                  :draggable="true"
+                  :icon="iconPath"
                   @click="center=univTable.row.location"
                 />
               </GmapMap>
@@ -73,6 +91,7 @@ export default {
   //Variables
   data: () => ({
     search: "",
+    iconPath: "images/res_36.png",
     headers: [
       {
         text: "Rank",
@@ -108,6 +127,11 @@ export default {
 
   //The methods we will need
   methods: {
+    getIcon(){
+      return {
+        
+      }
+    },
     rowClicked(row, column, evt) {
       this.$refs.refTable.toggleRowExpansion(row);
     },
