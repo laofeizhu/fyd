@@ -141,13 +141,16 @@ export default {
     },
     //load all univs from DB, we call this often to make sure the data is up to date
     load() {
+      console.log("trying to get univs data")
       http
         .get("univs")
         .then(response => {
+          console.log("successfully got univs data")
           this.univs = response.data.univs;
           console.log(this.univs);
         })
         .catch(e => {
+          console.log(e)
           this.errors.push(e);
         });
     },

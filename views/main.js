@@ -12,7 +12,7 @@ import "ant-design-vue/dist/antd.css";
 
 import "@fortawesome/fontawesome-free/css/all.css";
 import * as VueGoogleMaps from "vue2-google-maps";
-import { API_KEY } from "./../credentials";
+import { API_KEY } from "./../credentials.json";
 console.log(API_KEY);
 
 Vue.use(VueGoogleMaps, {

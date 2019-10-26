@@ -18,7 +18,7 @@ const definition = {
       unique: true,
       sparse: true
     }
- }
+  }
 }
 
 //Set any options for the schema

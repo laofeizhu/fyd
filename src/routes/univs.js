@@ -25,6 +25,7 @@ if (readFromCache) {
     univs = univs.slice(0, 2)
     parsedUnivs = univs.map(parseUnivInfo)
   })
+  log.info("finished reading univ info from cache")
 } else {
   Univ.find().exec().then(univsInDb => {
     log.success('Retrieved all {} univs', univsInDb.length)
