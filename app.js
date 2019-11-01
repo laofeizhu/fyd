@@ -5,17 +5,16 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors')
-const Trunks = require('trunks-log')
 
 const app = express();
 
 app.use(cors())
-const logs = new Trunks('', 'yellow', '')
 
 const { apiRoutes } = require('./server/routes/index')
 
 mongoose.Promise = global.Promise
-mongoose.connect(process.env.MONGO_URI,
+mongoUri = 'mongodb+srv://user0:Fw0YOup46jpJtneR@db0-avlwh.mongodb.net/flyx?retryWrites=true'
+mongoose.connect(mongoUri,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -46,6 +45,3 @@ app.use(function(err, req, res) {
 });
 
 module.exports = app;
-
-
-logs.success('App running on http://localhost:{}', process.env.PORT)
