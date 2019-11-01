@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node -r dotenv/config ./bin/www",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "start": "npm run build && node -r dotenv/config ./bin/www",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
