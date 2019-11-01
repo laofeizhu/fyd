@@ -17,7 +17,7 @@ Vue.use(Antd)
 Vue.use(Element)
 
 // Create the App with the router
-Vue({
+new Vue({
   el: '#app',
   router,
   render: h => h(App)
