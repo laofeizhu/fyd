@@ -5,6 +5,11 @@
 npm install
 ```
 
+### Start prod server
+```
+npm run start
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
